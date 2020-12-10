@@ -1,0 +1,252 @@
+
+C:\Users\User>mongo
+MongoDB shell version v4.2.8
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("ec93ee5e-b835-46ab-bbd5-065e296e2883") }
+MongoDB server version: 4.2.8
+Server has startup warnings:
+2020-12-08T20:31:42.354+0530 I  CONTROL  [initandlisten]
+2020-12-08T20:31:42.354+0530 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-12-08T20:31:42.355+0530 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-12-08T20:31:42.355+0530 I  CONTROL  [initandlisten]
+MongoDB Enterprise > use school
+switched to db school
+MongoDB Enterprise > db.student.insertOne({name:"Theresa",email:"theresageorge@gmail.com", guardian:"George",place:"Angamaly"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd19bd8f74ace9a94e8a1de")
+}
+MongoDB Enterprise > db.student.insertOne({name:"Joel",email:"joelgeorge@gmail.com", guardian:"George",place:"Angamaly"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd19c4cf74ace9a94e8a1df")
+}
+MongoDB Enterprise > db.student.insertOne({name:"Beena",email:"beena@gmail.com", guardian:"Francis",place:"Kochi"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd19c90f74ace9a94e8a1e0")
+}
+MongoDB Enterprise > db.student.insertOne({name:"Sneha",email:"sneha@gmail.com", guardian:"Jose",place:"Aluva"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd19cd2f74ace9a94e8a1e1")
+}
+MongoDB Enterprise > db.student.find().pretty()
+{
+        "_id" : ObjectId("5fd19bd8f74ace9a94e8a1de"),
+        "name" : "Theresa",
+        "email" : "theresageorge@gmail.com",
+        "guardian" : "George",
+        "place" : "Angamaly"
+}
+{
+        "_id" : ObjectId("5fd19c4cf74ace9a94e8a1df"),
+        "name" : "Joel",
+        "email" : "joelgeorge@gmail.com",
+        "guardian" : "George",
+        "place" : "Angamaly"
+}
+{
+        "_id" : ObjectId("5fd19c90f74ace9a94e8a1e0"),
+        "name" : "Beena",
+        "email" : "beena@gmail.com",
+        "guardian" : "Francis",
+        "place" : "Kochi"
+}
+{
+        "_id" : ObjectId("5fd19cd2f74ace9a94e8a1e1"),
+        "name" : "Sneha",
+        "email" : "sneha@gmail.com",
+        "guardian" : "Jose",
+        "place" : "Aluva"
+}
+MongoDB Enterprise > db.student.find().toArray();
+[
+        {
+                "_id" : ObjectId("5fd19bd8f74ace9a94e8a1de"),
+                "name" : "Theresa",
+                "email" : "theresageorge@gmail.com",
+                "guardian" : "George",
+                "place" : "Angamaly"
+        },
+        {
+                "_id" : ObjectId("5fd19c4cf74ace9a94e8a1df"),
+                "name" : "Joel",
+                "email" : "joelgeorge@gmail.com",
+                "guardian" : "George",
+                "place" : "Angamaly"
+        },
+        {
+                "_id" : ObjectId("5fd19c90f74ace9a94e8a1e0"),
+                "name" : "Beena",
+                "email" : "beena@gmail.com",
+                "guardian" : "Francis",
+                "place" : "Kochi"
+        },
+        {
+                "_id" : ObjectId("5fd19cd2f74ace9a94e8a1e1"),
+                "name" : "Sneha",
+                "email" : "sneha@gmail.com",
+                "guardian" : "Jose",
+                "place" : "Aluva"
+        }
+]
+MongoDB Enterprise > db.student.findOne({name:"Theresa"})
+{
+        "_id" : ObjectId("5fd19bd8f74ace9a94e8a1de"),
+        "name" : "Theresa",
+        "email" : "theresageorge@gmail.com",
+        "guardian" : "George",
+        "place" : "Angamaly"
+}
+MongoDB Enterprise > db.student.updateOne({name:"Theresa"},{$set:{"hobbies":["dancing","reading"]}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+MongoDB Enterprise > db.student.findOne({name:"Theresa"})
+{
+        "_id" : ObjectId("5fd19bd8f74ace9a94e8a1de"),
+        "name" : "Theresa",
+        "email" : "theresageorge@gmail.com",
+        "guardian" : "George",
+        "place" : "Angamaly",
+        "hobbies" : [
+                "dancing",
+                "reading"
+        ]
+}
+MongoDB Enterprise > db.student.updateMany({},{$set:{schoolName:"DePaul"}})
+{ "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 4 }
+MongoDB Enterprise > db.student.find().toArray();
+[
+        {
+                "_id" : ObjectId("5fd19bd8f74ace9a94e8a1de"),
+                "name" : "Theresa",
+                "email" : "theresageorge@gmail.com",
+                "guardian" : "George",
+                "place" : "Angamaly",
+                "hobbies" : [
+                        "dancing",
+                        "reading"
+                ],
+                "schoolName" : "DePaul"
+        },
+        {
+                "_id" : ObjectId("5fd19c4cf74ace9a94e8a1df"),
+                "name" : "Joel",
+                "email" : "joelgeorge@gmail.com",
+                "guardian" : "George",
+                "place" : "Angamaly",
+                "schoolName" : "DePaul"
+        },
+        {
+                "_id" : ObjectId("5fd19c90f74ace9a94e8a1e0"),
+                "name" : "Beena",
+                "email" : "beena@gmail.com",
+                "guardian" : "Francis",
+                "place" : "Kochi",
+                "schoolName" : "DePaul"
+        },
+        {
+                "_id" : ObjectId("5fd19cd2f74ace9a94e8a1e1"),
+                "name" : "Sneha",
+                "email" : "sneha@gmail.com",
+                "guardian" : "Jose",
+                "place" : "Aluva",
+                "schoolName" : "DePaul"
+        }
+]
+MongoDB Enterprise > db.student.deleteOne({email:"beena@gmail.com"})
+{ "acknowledged" : true, "deletedCount" : 1 }
+MongoDB Enterprise > db.student.find().pretty()
+{
+        "_id" : ObjectId("5fd19bd8f74ace9a94e8a1de"),
+        "name" : "Theresa",
+        "email" : "theresageorge@gmail.com",
+        "guardian" : "George",
+        "place" : "Angamaly",
+        "hobbies" : [
+                "dancing",
+                "reading"
+        ],
+        "schoolName" : "DePaul"
+}
+{
+        "_id" : ObjectId("5fd19c4cf74ace9a94e8a1df"),
+        "name" : "Joel",
+        "email" : "joelgeorge@gmail.com",
+        "guardian" : "George",
+        "place" : "Angamaly",
+        "schoolName" : "DePaul"
+}
+{
+        "_id" : ObjectId("5fd19cd2f74ace9a94e8a1e1"),
+        "name" : "Sneha",
+        "email" : "sneha@gmail.com",
+        "guardian" : "Jose",
+        "place" : "Aluva",
+        "schoolName" : "DePaul"
+}
+MongoDB Enterprise > db.student.updateOne({name:"Theresa"},{$set:{"class":{std:"four",div:"A"}}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+MongoDB Enterprise > db.student.find().pretty()
+{
+        "_id" : ObjectId("5fd19bd8f74ace9a94e8a1de"),
+        "name" : "Theresa",
+        "email" : "theresageorge@gmail.com",
+        "guardian" : "George",
+        "place" : "Angamaly",
+        "hobbies" : [
+                "dancing",
+                "reading"
+        ],
+        "schoolName" : "DePaul",
+        "class" : {
+                "std" : "four",
+                "div" : "A"
+        }
+}
+{
+        "_id" : ObjectId("5fd19c4cf74ace9a94e8a1df"),
+        "name" : "Joel",
+        "email" : "joelgeorge@gmail.com",
+        "guardian" : "George",
+        "place" : "Angamaly",
+        "schoolName" : "DePaul"
+}
+{
+        "_id" : ObjectId("5fd19cd2f74ace9a94e8a1e1"),
+        "name" : "Sneha",
+        "email" : "sneha@gmail.com",
+        "guardian" : "Jose",
+        "place" : "Aluva",
+        "schoolName" : "DePaul"
+}
+MongoDB Enterprise > db.student.findOne({"class.div":"A"})
+{
+        "_id" : ObjectId("5fd19bd8f74ace9a94e8a1de"),
+        "name" : "Theresa",
+        "email" : "theresageorge@gmail.com",
+        "guardian" : "George",
+        "place" : "Angamaly",
+        "hobbies" : [
+                "dancing",
+                "reading"
+        ],
+        "schoolName" : "DePaul",
+        "class" : {
+                "std" : "four",
+                "div" : "A"
+        }
+}
+MongoDB Enterprise > db.student.deleteMany({place:"Angamaly"})
+{ "acknowledged" : true, "deletedCount" : 2 }
+MongoDB Enterprise > db.student.find().pretty()
+{
+        "_id" : ObjectId("5fd19cd2f74ace9a94e8a1e1"),
+        "name" : "Sneha",
+        "email" : "sneha@gmail.com",
+        "guardian" : "Jose",
+        "place" : "Aluva",
+        "schoolName" : "DePaul"
+}
+MongoDB Enterprise > db.student.deleteMany({})
+{ "acknowledged" : true, "deletedCount" : 1 }

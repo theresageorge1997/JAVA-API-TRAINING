@@ -1,0 +1,628 @@
+Microsoft Windows [Version 10.0.19041.630]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Users\User>mongo
+MongoDB shell version v4.2.8
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("79a33991-5763-428c-8b10-1605715ba1de") }
+MongoDB server version: 4.2.8
+Server has startup warnings:
+2020-12-10T16:09:57.918+0530 I  CONTROL  [initandlisten]
+2020-12-10T16:09:57.919+0530 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-12-10T16:09:57.919+0530 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-12-10T16:09:57.919+0530 I  CONTROL  [initandlisten]
+MongoDB Enterprise > show dbs
+Trackify        0.000GB
+Trackify-local  0.172GB
+admin           0.000GB
+blog            0.000GB
+bookRegistry    0.000GB
+cityData        0.000GB
+config          0.000GB
+local           0.000GB
+mycrew-local    0.007GB
+mydb            0.000GB
+school          0.000GB
+shop            0.000GB
+test            0.000GB
+MongoDB Enterprise > db.products.insertOne({name:"JS Book", price:9000})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd221e07a4d65861b0f9ff9")
+}
+MongoDB Enterprise > db.products.find()
+{ "_id" : ObjectId("5fd221e07a4d65861b0f9ff9"), "name" : "JS Book", "price" : 9000 }
+MongoDB Enterprise > db.products.find().pretty()
+{
+        "_id" : ObjectId("5fd221e07a4d65861b0f9ff9"),
+        "name" : "JS Book",
+        "price" : 9000
+}
+MongoDB Enterprise > db.products.insertOne({name:"computer", price:129045, description:"Gaming power",details:{cpu:"intel i7 10 th gen",memory:16}})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd222f47a4d65861b0f9ffa")
+}
+MongoDB Enterprise > db.products.find().pretty()
+{
+        "_id" : ObjectId("5fd221e07a4d65861b0f9ff9"),
+        "name" : "JS Book",
+        "price" : 9000
+}
+{
+        "_id" : ObjectId("5fd222f47a4d65861b0f9ffa"),
+        "name" : "computer",
+        "price" : 129045,
+        "description" : "Gaming power",
+        "details" : {
+                "cpu" : "intel i7 10 th gen",
+                "memory" : 16
+        }
+}
+MongoDB Enterprise > db.products.insertOne({name:A Book", price:258, description:"This is a famous book for self growth"})
+2020-12-10T19:02:27.458+0530 E  QUERY    [js] uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:30
+MongoDB Enterprise > db.products.insertOne({name:"A Book", price:258, description:"This is a famous book for self growth"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd223827a4d65861b0f9ffb")
+}
+MongoDB Enterprise > db.products.find().pretty()
+{
+        "_id" : ObjectId("5fd221e07a4d65861b0f9ff9"),
+        "name" : "JS Book",
+        "price" : 9000
+}
+{
+        "_id" : ObjectId("5fd222f47a4d65861b0f9ffa"),
+        "name" : "computer",
+        "price" : 129045,
+        "description" : "Gaming power",
+        "details" : {
+                "cpu" : "intel i7 10 th gen",
+                "memory" : 16
+        }
+}
+{
+        "_id" : ObjectId("5fd223827a4d65861b0f9ffb"),
+        "name" : "A Book",
+        "price" : 258,
+        "description" : "This is a famous book for self growth"
+}
+MongoDB Enterprise > use flights
+switched to db flights
+MongoDB Enterprise > db.flightData.insertOne({"departureAirport":"TKL","arrivalAirport":"MKL","aircraft":"AirBus 320","distance":12000,"intercontinental":true})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd2259b7a4d65861b0f9ffc")
+}
+MongoDB Enterprise > db.flightData.insertOne({"departureAirport":"MUC","arrivalAirport":"SFO"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd225c07a4d65861b0f9ffd")
+}
+MongoDB Enterprise > db.products.find().pretty()
+MongoDB Enterprise > db.flightData.find().pretty()
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true
+}
+{
+        "_id" : ObjectId("5fd225c07a4d65861b0f9ffd"),
+        "departureAirport" : "MUC",
+        "arrivalAirport" : "SFO"
+}
+MongoDB Enterprise > db.flightData.insertOne({"departureAirport":"MUC","arrivalAirport":"SFO",_id:"txl-lhr-1"})
+{ "acknowledged" : true, "insertedId" : "txl-lhr-1" }
+MongoDB Enterprise > db.flightData.find().pretty()
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true
+}
+{
+        "_id" : ObjectId("5fd225c07a4d65861b0f9ffd"),
+        "departureAirport" : "MUC",
+        "arrivalAirport" : "SFO"
+}
+{
+        "_id" : "txl-lhr-1",
+        "departureAirport" : "MUC",
+        "arrivalAirport" : "SFO"
+}
+MongoDB Enterprise > db.flightData.insertOne({"departureAirport":"MUC","arrivalAirport":"SFO",_id:"txl-lhr-1"})
+2020-12-10T19:15:04.174+0530 E  QUERY    [js] WriteError({
+        "index" : 0,
+        "code" : 11000,
+        "errmsg" : "E11000 duplicate key error collection: flights.flightData index: _id_ dup key: { _id: \"txl-lhr-1\" }",
+        "op" : {
+                "departureAirport" : "MUC",
+                "arrivalAirport" : "SFO",
+                "_id" : "txl-lhr-1"
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 11000,
+        "errmsg" : "E11000 duplicate key error collection: flights.flightData index: _id_ dup key: { _id: \"txl-lhr-1\" }",
+        "op" : {
+                "departureAirport" : "MUC",
+                "arrivalAirport" : "SFO",
+                "_id" : "txl-lhr-1"
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.insertOne@src/mongo/shell/crud_api.js:264:9
+@(shell):1:1
+MongoDB Enterprise > db.flightData.deleteOne({departureAirport : "MUC"})
+{ "acknowledged" : true, "deletedCount" : 1 }
+MongoDB Enterprise > db.flightData.find().pretty()
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true
+}
+{
+        "_id" : "txl-lhr-1",
+        "departureAirport" : "MUC",
+        "arrivalAirport" : "SFO"
+}
+MongoDB Enterprise > db.flightData.deleteMany()
+2020-12-10T19:22:46.825+0530 E  QUERY    [js] uncaught exception: Error: find() requires query criteria :
+Bulk/this.find@src/mongo/shell/bulk_api.js:796:23
+DBCollection.prototype.deleteMany@src/mongo/shell/crud_api.js:420:20
+@(shell):1:1
+MongoDB Enterprise > db.flightData.updateOne({distance : "12000"}, {$set:{marker:"delete"}})
+{ "acknowledged" : true, "matchedCount" : 0, "modifiedCount" : 0 }
+MongoDB Enterprise > db.flightData.find().pretty()
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true
+}
+{
+        "_id" : "txl-lhr-1",
+        "departureAirport" : "MUC",
+        "arrivalAirport" : "SFO"
+}
+MongoDB Enterprise > db.flightData.insertOne({"departureAirport":"LHR","arrivalAirport":"TXL","aircraft":"AirBus A360","distance":950,"intercontinental":false})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd2291c7a4d65861b0f9ffe")
+}
+MongoDB Enterprise > db.flightData.updateMany({},{$set:{marker:"to Delete"}})
+{ "acknowledged" : true, "matchedCount" : 3, "modifiedCount" : 3 }
+MongoDB Enterprise > db.flightData.find().pretty()
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true,
+        "marker" : "to Delete"
+}
+{
+        "_id" : "txl-lhr-1",
+        "departureAirport" : "MUC",
+        "arrivalAirport" : "SFO",
+        "marker" : "to Delete"
+}
+{
+        "_id" : ObjectId("5fd2291c7a4d65861b0f9ffe"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false,
+        "marker" : "to Delete"
+}
+MongoDB Enterprise > db.insertMany([{
+...         "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+...         "departureAirport" : "TKL",
+...         "arrivalAirport" : "MKL",
+...         "aircraft" : "AirBus 320",
+...         "distance" : 12000,
+...         "intercontinental" : true,
+...         "marker" : "to Delete"
+... }
+... {
+...         "_id" : "txl-lhr-1",
+...         "departureAirport" : "MUC",
+...         "arrivalAirport" : "SFO",
+...         "marker" : "to Delete"
+... }
+... {
+...         "_id" : ObjectId("5fd2291c7a4d65861b0f9ffe"),
+...         "departureAirport" : "LHR",
+...         "arrivalAirport" : "TXL",
+...         "aircraft" : "AirBus A360",
+...         "distance" : 950,
+...         "intercontinental" : false,
+...         "marker" : "to Delete"
+...
+...
+MongoDB Enterprise > db.flightData.insertMany([{"departureAirport":"TKL","arrivalAirport":"MKL","aircraft":"AirBus 320","distance":12000,"intercontinental":true},{"departureAirport":"LHR","arrivalAirport":"TXL","aircraft":"AirBus A360","distance":950,"intercontinental":false}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("5fd22bad7a4d65861b0f9fff"),
+                ObjectId("5fd22bad7a4d65861b0fa000")
+        ]
+}
+MongoDB Enterprise > db.flightData.find({intercontinental:true}).pretty()
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true,
+        "marker" : "to Delete"
+}
+{
+        "_id" : ObjectId("5fd22bad7a4d65861b0f9fff"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true
+}
+MongoDB Enterprise > db.flightData.find({distance:{$gt: 12000}})
+MongoDB Enterprise > db.flightData.find({distance:{$gt: 10000}})
+{ "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"), "departureAirport" : "TKL", "arrivalAirport" : "MKL", "aircraft" : "AirBus 320", "distance" : 12000, "intercontinental" : true, "marker" : "to Delete" }
+{ "_id" : ObjectId("5fd22bad7a4d65861b0f9fff"), "departureAirport" : "TKL", "arrivalAirport" : "MKL", "aircraft" : "AirBus 320", "distance" : 12000, "intercontinental" : true }
+MongoDB Enterprise > db.flightData.find({distance:{$gt: 10000}}).pretty()
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true,
+        "marker" : "to Delete"
+}
+{
+        "_id" : ObjectId("5fd22bad7a4d65861b0f9fff"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true
+}
+MongoDB Enterprise > db.flightData.findOne({distance:{$gt: 900}})
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true,
+        "marker" : "to Delete"
+}
+MongoDB Enterprise > db.flightData.find().pretty()
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true,
+        "marker" : "to Delete"
+}
+{
+        "_id" : "txl-lhr-1",
+        "departureAirport" : "MUC",
+        "arrivalAirport" : "SFO",
+        "marker" : "to Delete"
+}
+{
+        "_id" : ObjectId("5fd2291c7a4d65861b0f9ffe"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false,
+        "marker" : "to Delete"
+}
+{
+        "_id" : ObjectId("5fd22bad7a4d65861b0f9fff"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true
+}
+{
+        "_id" : ObjectId("5fd22bad7a4d65861b0fa000"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false
+}
+MongoDB Enterprise > db.flightData.updateOne({_id:  ObjectId("5fd22bad7a4d65861b0f9fff")}, {$set: {delayed:true}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+MongoDB Enterprise > db.flightData.find().pretty()
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true,
+        "marker" : "to Delete"
+}
+{
+        "_id" : "txl-lhr-1",
+        "departureAirport" : "MUC",
+        "arrivalAirport" : "SFO",
+        "marker" : "to Delete"
+}
+{
+        "_id" : ObjectId("5fd2291c7a4d65861b0f9ffe"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false,
+        "marker" : "to Delete"
+}
+{
+        "_id" : ObjectId("5fd22bad7a4d65861b0f9fff"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true,
+        "delayed" : true
+}
+{
+        "_id" : ObjectId("5fd22bad7a4d65861b0fa000"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false
+}
+MongoDB Enterprise > db.flightData.update({_id:  ObjectId("5fd22bad7a4d65861b0f9fff")}, {$set: {delayed:true}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+MongoDB Enterprise > db.flightData.update({_id:  ObjectId("5fd22bad7a4d65861b0f9fff")}, {$set: {delayed:false}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+MongoDB Enterprise > db.flightData.find().pretty()
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true,
+        "marker" : "to Delete"
+}
+{
+        "_id" : "txl-lhr-1",
+        "departureAirport" : "MUC",
+        "arrivalAirport" : "SFO",
+        "marker" : "to Delete"
+}
+{
+        "_id" : ObjectId("5fd2291c7a4d65861b0f9ffe"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false,
+        "marker" : "to Delete"
+}
+{
+        "_id" : ObjectId("5fd22bad7a4d65861b0f9fff"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true,
+        "delayed" : false
+}
+{
+        "_id" : ObjectId("5fd22bad7a4d65861b0fa000"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false
+}
+MongoDB Enterprise > db.flightData.updateMany({_id:  ObjectId("5fd22bad7a4d65861b0f9fff")}, {$set: {delayed:false}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+MongoDB Enterprise > db.flightData.updateMany({_id:  ObjectId("5fd22bad7a4d65861b0f9fff")}, {$set: {delayed:false}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+MongoDB Enterprise > db.flightData.update({_id:  ObjectId("5fd22bad7a4d65861b0f9fff")}, {$set: {delayed:false}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+MongoDB Enterprise > db.flightData.replaceOne{_id : ObjectId("5fd22bad7a4d65861b0f9fff")},({"departureAirport":"LHR","arrivalAirport":"TXL","aircraft":"AirBus A360","distance":950,"intercontinental":false})
+2020-12-10T19:50:47.928+0530 E  QUERY    [js] uncaught exception: SyntaxError: unexpected token: '{' :
+@(shell):1:24
+MongoDB Enterprise > db.flightData.replaceOne({_id : ObjectId("5fd22bad7a4d65861b0f9fff")},({"departureAirport":"LHR","arrivalAirport":"TXL","aircraft":"AirBus A360","distance":950,"intercontinental":false})
+... db.flightData.replaceOne{_id : ObjectId("5fd22bad7a4d65861b0f9fff")},({"departureAirport":"LHR","arrivalAirport":"TXL","aircraft":"AirBus A360","distance":950,"intercontinental":false})^C
+
+MongoDB Enterprise > db.flightData.replaceOne({_id : ObjectId("5fd22bad7a4d65861b0f9fff")},{"departureAirport":"LHR","arrivalAirport":"TXL","aircraft":"AirBus A360","distance":950,"intercontinental":false})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+MongoDB Enterprise > db.flightData.find().pretty()
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true,
+        "marker" : "to Delete"
+}
+{
+        "_id" : "txl-lhr-1",
+        "departureAirport" : "MUC",
+        "arrivalAirport" : "SFO",
+        "marker" : "to Delete"
+}
+{
+        "_id" : ObjectId("5fd2291c7a4d65861b0f9ffe"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false,
+        "marker" : "to Delete"
+}
+{
+        "_id" : ObjectId("5fd22bad7a4d65861b0f9fff"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false
+}
+{
+        "_id" : ObjectId("5fd22bad7a4d65861b0fa000"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false
+}
+MongoDB Enterprise > db.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21}{"name":"theresa","age":23,{"name":"sree","age":22}}])
+2020-12-10T19:55:02.3
+MongoDB Enterprise > db.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21},{"name":"theresa","age":23},{"name":"sree","age":22}])
+{ongoDB Enterprise > db.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21}{"name":"theresa","age":23,{"name":"sree","age":22}}])
+        "acknowledged" : true,gers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21}{"name":"theresa","age":23},{"name":"sree","age":22}])
+        "insertedIds" : [assengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21}{"name":"theresa","age":23},{"name":"sree","age":22}])
+                ObjectId("5fd22ff37a4d65861b0fa001"),":"venkat","age":32},{"name":"judwin","age":21}{"name":"theresa","age":23},{"name":"sree","age":22}])
+                ObjectId("5fd22ff37a4d65861b0fa002"),
+                ObjectId("5fd22ff37a4d65861b0fa003"),
+                ObjectId("5fd22ff37a4d65861b0fa004")
+        ]
+}
+MongoDB Enterprise > db.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21},{"name":"theresa","age":23},{"name":"sree","age":22}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("5fd22ff77a4d65861b0fa005"),
+                ObjectId("5fd22ff77a4d65861b0fa006"),
+                ObjectId("5fd22ff77a4d65861b0fa007"),
+                ObjectId("5fd22ff77a4d65861b0fa008")
+        ]
+}
+MongoDB Enterprise > db.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21},{"name":"theresa","age":23},{"name":"sredb.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21}{"name":"theresa","age":23},{"name":"sreedb.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21}{"name":"theresa","age":23,{"name":"sree"db.flightData.replaceOne({_id : ObjectId("5fd22bad7a4d65861b0f9fff")},{"departureAirport":"LHR","arrivalAirport":"TXL","aircraft":"AirBus A360","distance":950,"intercontinental":false})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+MongoDB Enterprise > db.passengers.find({}, {name:1,_id:0}).pretty()
+{ "name" : "venkat" }
+{ "name" : "judwin" }
+{ "name" : "theresa" }
+{ "name" : "sree" }
+{ "name" : "venkat" }
+{ "name" : "judwin" }
+{ "name" : "theresa" }
+{ "name" : "sree" }
+MongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age"}}})
+2020-12-10T20:01:08.018+0530 E  QUERY    [js] uncaught exception: SyntaxError: '' literal not terminated before end of script :
+@(shell):1:95
+MongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:"1 hour age"}}})
+{ "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 5 }
+MongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",det}}})                     db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",deta}}})                    db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",deta                                                                                                                             )                  db.MongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",detail:{responsible:"venkat"}}}}){$set: {status:{descriMongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",details}}})
+MongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",detail:{responsible:"venkat"}}}})
+MongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",detail:{responsible:"venkat"}}}})
+MongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",detail:{responsible:"venkat"}}}})
+MongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",detail:{responsible:"venkat"}}}})
+MongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",detail:{responsible:"venkat"}}}})
+MongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",detail:{responsible:"venkat"}}}})
+MongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:"1 hour age",detail:{responsible:"venkat"}}}})
+{ "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 5 }
+MongoDB Enterprise > db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:"1 hour age",detail:{responsible:"venkat"db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",detail:{responsible:"venkat"db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",details}}})                 db.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21},{"name":"theresa","age":23},{"name":"sredb.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21}{"name":"theresa","age":23},{"name":"sreedb.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21}{"name":"theresa","age":23,{"name":"sree"db.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21}{"name":"theresa","age":23,{"name":"sree"db.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21}{"name":"theresa","age":23},{"name":"sreedb.passengers.insertMany([{"name":"venkat","age":32},{"name":"judwin","age":21},{"name":"theresa","age":23},{"name":"sredb.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",details}}})                 db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:'1 hour age",detail:{responsible:"venkat"db.flightData.updateMany({}, {$set: {status:{description:"on-time",lastUpdated:"1 hour age",detail:{responsible:"venkat"
+MongoDB Enterprise > db.flightData.find().pretty()
+{
+        "_id" : ObjectId("5fd2259b7a4d65861b0f9ffc"),
+        "departureAirport" : "TKL",
+        "arrivalAirport" : "MKL",
+        "aircraft" : "AirBus 320",
+        "distance" : 12000,
+        "intercontinental" : true,
+        "marker" : "to Delete",
+        "status" : {
+                "description" : "on-time",
+                "lastUpdated" : "1 hour age",
+                "detail" : {
+                        "responsible" : "venkat"
+                }
+        }
+}
+{
+        "_id" : "txl-lhr-1",
+        "departureAirport" : "MUC",
+        "arrivalAirport" : "SFO",
+        "marker" : "to Delete",
+        "status" : {
+                "description" : "on-time",
+                "lastUpdated" : "1 hour age",
+                "detail" : {
+                        "responsible" : "venkat"
+                }
+        }
+}
+{
+        "_id" : ObjectId("5fd2291c7a4d65861b0f9ffe"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false,
+        "marker" : "to Delete",
+        "status" : {
+                "description" : "on-time",
+                "lastUpdated" : "1 hour age",
+                "detail" : {
+                        "responsible" : "venkat"
+                }
+        }
+}
+{
+        "_id" : ObjectId("5fd22bad7a4d65861b0f9fff"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false,
+        "status" : {
+                "description" : "on-time",
+                "lastUpdated" : "1 hour age",
+                "detail" : {
+                        "responsible" : "venkat"
+                }
+        }
+}
+{
+        "_id" : ObjectId("5fd22bad7a4d65861b0fa000"),
+        "departureAirport" : "LHR",
+        "arrivalAirport" : "TXL",
+        "aircraft" : "AirBus A360",
+        "distance" : 950,
+        "intercontinental" : false,
+        "status" : {
+                "description" : "on-time",
+                "lastUpdated" : "1 hour age",
+                "detail" : {
+                        "responsible" : "venkat"
+                }
+        }
+}
