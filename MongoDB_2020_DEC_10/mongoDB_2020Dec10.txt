@@ -1,0 +1,240 @@
+Microsoft Windows [Version 10.0.19041.630]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Users\User>mongo
+MongoDB shell version v4.2.8
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("8446a5af-3d9a-4cf7-9272-9e155e32d553") }
+MongoDB server version: 4.2.8
+Server has startup warnings:
+2020-12-08T20:31:42.354+0530 I  CONTROL  [initandlisten]
+2020-12-08T20:31:42.354+0530 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-12-08T20:31:42.355+0530 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-12-08T20:31:42.355+0530 I  CONTROL  [initandlisten]
+MongoDB Enterprise > use cityData
+switched to db cityData
+MongoDB Enterprise > db.cities.insertOne({name:"Bangalore",coordinates:{lat:21,lng:55}})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd1c57b12bb7cb73db0c76d")
+}
+MongoDB Enterprise > db.cities.findOne()
+{
+        "_id" : ObjectId("5fd1c57b12bb7cb73db0c76d"),
+        "name" : "Bangalore",
+        "coordinates" : {
+                "lat" : 21,
+                "lng" : 55
+        }
+}
+MongoDB Enterprise > db.citizens.insertMany([{name:"venkat",cityId: ObjectId("5fd1c57b12bb7cb73db0c76d")},{name:"sajith",cityId:ObjectId("5fd1c57b12bb7cb73db0c76d")}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("5fd1c6c312bb7cb73db0c76e"),
+                ObjectId("5fd1c6c312bb7cb73db0c76f")
+        ]
+}
+MongoDB Enterprise > db.citizens.find()
+{ "_id" : ObjectId("5fd1c6c312bb7cb73db0c76e"), "name" : "venkat", "cityId" : ObjectId("5fd1c57b12bb7cb73db0c76d") }
+{ "_id" : ObjectId("5fd1c6c312bb7cb73db0c76f"), "name" : "sajith", "cityId" : ObjectId("5fd1c57b12bb7cb73db0c76d") }
+MongoDB Enterprise > db.citizens.find().pretty()
+{
+        "_id" : ObjectId("5fd1c6c312bb7cb73db0c76e"),
+        "name" : "venkat",
+        "cityId" : ObjectId("5fd1c57b12bb7cb73db0c76d")
+}
+{
+        "_id" : ObjectId("5fd1c6c312bb7cb73db0c76f"),
+        "name" : "sajith",
+        "cityId" : ObjectId("5fd1c57b12bb7cb73db0c76d")
+}
+MongoDB Enterprise > use shop
+switched to db shop
+MongoDB Enterprise > db.products.insertOne({title: "A Book", price : 12.99})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd1c7f012bb7cb73db0c770")
+}
+MongoDB Enterprise > db.customers.insertOne({name:"venkat",age:32})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd1c81112bb7cb73db0c771")
+}
+MongoDB Enterprise > db.orders.insertOne({productId: ObjectId("5fd1c7f012bb7cb73db0c770"),customerId: ObjectId("5fd1c81112bb7cb73db0c771")})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd1c89d12bb7cb73db0c772")
+}
+MongoDB Enterprise > db.orders.drop()
+true
+MongoDB Enterprise > db.orders.find()
+MongoDB Enterprise > db.products.find()
+{ "_id" : ObjectId("5fd1c7f012bb7cb73db0c770"), "title" : "A Book", "price" : 12.99 }
+MongoDB Enterprise > db.customers.find()
+{ "_id" : ObjectId("5fd1c81112bb7cb73db0c771"), "name" : "venkat", "age" : 32 }
+MongoDB Enterprise > db.customers.updateOne({},{$set:{orders:[{productId: ObjectId("5fd1c7f012bb7cb73db0c770"),quantity:2}]}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+MongoDB Enterprise > db.customers.findOne()
+{
+        "_id" : ObjectId("5fd1c81112bb7cb73db0c771"),
+        "name" : "venkat",
+        "age" : 32,
+        "orders" : [
+                {
+                        "productId" : ObjectId("5fd1c7f012bb7cb73db0c770"),
+                        "quantity" : 2
+                }
+        ]
+}
+MongoDB Enterprise > db.products.findOne()
+{
+        "_id" : ObjectId("5fd1c7f012bb7cb73db0c770"),
+        "title" : "A Book",
+        "price" : 12.99
+}
+MongoDB Enterprise > use bookRegistry
+switched to db bookRegistry
+MongoDB Enterprise > db.books.insertOne({name: "My Favourite Book", authors: [{name: "venkat", age:32}, {name: "sajith", age: 29}]})         db.books.insertOne({name: "My Favourite Book", authors: [{name: "venkat", age:32}, {name: "sajith", age: 29}]})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd1cc1212bb7cb73db0c773")
+}
+MongoDB Enterprise > db.books.pretty()
+2020-12-10T12:50:04.812+0530 E  QUERY    [js] uncaught exception: TypeError: db.books.pretty is not a function :
+@(shell):1:1
+MongoDB Enterprise > drop bookRegistry
+2020-12-10T12:50:49.314+0530 E  QUERY    [js] uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:5
+MongoDB Enterprise > drop db bookRegistry
+2020-12-10T12:50:54.722+0530 E  QUERY    [js] uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:5
+MongoDB Enterprise > db.bookRegistr.drop()
+false
+MongoDB Enterprise > db.bookRegistry.drop()
+false
+MongoDB Enterprise > db.books.drop()
+true
+MongoDB Enterprise > use bookRegistry
+switched to db bookRegistry
+MongoDB Enterprise > db.books.insertOne({name: "My Favourite Book", authors: [{name: "venkat", age:32}, {name: "sajith", age: 29}]})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd1ccb412bb7cb73db0c774")
+}
+MongoDB Enterprise > db.books.find().pretty()
+{
+        "_id" : ObjectId("5fd1ccb412bb7cb73db0c774"),
+        "name" : "My Favourite Book",
+        "authors" : [
+                {
+                        "name" : "venkat",
+                        "age" : 32
+                },
+                {
+                        "name" : "sajith",
+                        "age" : 29
+                }
+        ]
+}
+MongoDB Enterprise > db.authors.insertMany([{name:"venkat", age: 32, address:{street:"main"}},{name:"sajith",age:29,address:{street:"tree"}}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("5fd1cdf712bb7cb73db0c775"),
+                ObjectId("5fd1cdf712bb7cb73db0c776")
+        ]
+}
+MongoDB Enterprise > db.authors.find().pretty()
+{
+        "_id" : ObjectId("5fd1cdf712bb7cb73db0c775"),
+        "name" : "venkat",
+        "age" : 32,
+        "address" : {
+                "street" : "main"
+        }
+}
+{
+        "_id" : ObjectId("5fd1cdf712bb7cb73db0c776"),
+        "name" : "sajith",
+        "age" : 29,
+        "address" : {
+                "street" : "tree"
+        }
+}
+MongoDB Enterprise > db.book.updateOne({},{$set:{authors: [ObjectId("5fd1cdf712bb7cb73db0c775"),ObjectId("5fd1cdf712bb7cb73db0c776")]}})
+{ "acknowledged" : true, "matchedCount" : 0, "modifiedCount" : 0 }
+MongoDB Enterprise > db.books.findOne()
+{
+        "_id" : ObjectId("5fd1ccb412bb7cb73db0c774"),
+        "name" : "My Favourite Book",
+        "authors" : [
+                {
+                        "name" : "venkat",
+                        "age" : 32
+                },
+                {
+                        "name" : "sajith",
+                        "age" : 29
+                }
+        ]
+}
+MongoDB Enterprise > use blog
+switched to db blog
+MongoDB Enterprise > db.user.insertMany([{name:"Venkat",age:32,email:"vsr@gmail.com"}, {name:"Akhil", age: 21, email:"akhil@gmail.com"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("5fd1e11e12bb7cb73db0c777"),
+                ObjectId("5fd1e11e12bb7cb73db0c778")
+        ]
+}
+MongoDB Enterprise > db.user.find().pretty()
+{
+        "_id" : ObjectId("5fd1e11e12bb7cb73db0c777"),
+        "name" : "Venkat",
+        "age" : 32,
+        "email" : "vsr@gmail.com"
+}
+{
+        "_id" : ObjectId("5fd1e11e12bb7cb73db0c778"),
+        "name" : "Akhil",
+        "age" : 21,
+        "email" : "akhil@gmail.com"
+}
+MongoDB Enterprise > db.posts.insertOne({title:"My First Post", text:"This is my first post, Ihope you like it",tags:["new","tech"],creator:ObjectId("5fd1e11e12bb7cb73db0c777"), comments: [{text:"I liked this post",author: ObjectId("5fd1e11e12bb7cb73db0c778)}]})
+2020-12-10T14:24:16.428+0530 E  QUERY    [js] uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:241
+MongoDB Enterprise > db.posts.findOne()
+null
+MongoDB Enterprise > db.posts.insertOne({title:"My First Post", text:"This is my first post, Ihope you like it",tags:["new","tech"],creator:ObjectId("5fd1e11e12bb7cb73db0c777"), comments: [{text:"I liked this post",author: ObjectId("5fd1e11e12bb7cb73db0c778")}]})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5fd1e26812bb7cb73db0c779")
+}
+MongoDB Enterprise > db.posts.findOne()
+{
+        "_id" : ObjectId("5fd1e26812bb7cb73db0c779"),
+        "title" : "My First Post",
+        "text" : "This is my first post, Ihope you like it",
+        "tags" : [
+                "new",
+                "tech"
+        ],
+        "creator" : ObjectId("5fd1e11e12bb7cb73db0c777"),
+        "comments" : [
+                {
+                        "text" : "I liked this post",
+                        "author" : ObjectId("5fd1e11e12bb7cb73db0c778")
+                }
+        ]
+}
+MongoDB Enterprise > db.user.insertMany([{name:"Venkat",age:32,email:"vsr@gmail.com"},{name:"Akhil", age:21,email:"akhil@gmail.com"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("5fd1e2ea12bb7cb73db0c77a"),
+                ObjectId("5fd1e2ea12bb7cb73db0c77b")
+        ]
+}
+MongoDB Enterprise >
