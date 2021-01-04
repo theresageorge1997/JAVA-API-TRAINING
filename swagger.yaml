@@ -1,0 +1,59 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: UST TRAINING API
+  description: This specification is for the UST Training Portal. Here you can find information abput UST Trainings and openings
+  contact: 
+    name: UST  
+    url: https://www.ust-global.com
+    email: admin@ust-global.com
+  license:
+    name: GNU
+    url: https://www.ust-global.com
+host: localhost:3000
+basePath: /v1/
+schemes:
+  - http
+  - https
+  
+consumes:
+  - application/json
+#format of the responses to hte client
+produces: 
+  - application/json
+  
+tags:
+  - name: trainings
+    description: fff
+  
+  - name: Jobs
+    description: Refer to trainings that are offered by UST
+  
+  - name: Services
+    description: Refer to trainings that are offered by UST
+  
+  
+externalDocs:
+  description: This is an external doc
+  url: https://www.developer.ust-global.com/docs
+
+#Definitions
+definitions:
+  GeneralError:
+    required:
+      - message
+    properties:
+    message:
+      type: string
+      
+  #NotFoundError
+  NotFoundError:
+    required:
+      - message
+      - hint
+    properties:
+      message:
+        type: string
+      hint:
+        type: string
+        
