@@ -1,0 +1,22 @@
+1. Evolution of RESTFul Services
+Ans.In Early stages , SOAP and XML were used.XML is complex , difficult to understand and code and the applications were not scalable that means the changes was not easily adaptable.
+    When JSON CORBA (JSON Common Object Request Broker Architecture) introduced , it was and is easy to understand and code.
+    Richardson Maturity Model was used to define RESTful API standards by different levels.
+    Roy fielding rest dissertation brings up RESTful architectural constraints.
+
+2. REST API Architecural Constraints
+Ans. Uniform Interface - constraint that differentiate between a REST API and Non-REST API
+     Stateless - It means that the necessary state to handle the request is contained within the request
+	         itself and server would not store anything related to the session
+     Caching - It provides high scalability and impactness and improves the performance. Server specifies the cache control directives and send through
+                 http headers in response.
+     Client-Server -REST application should have a client-server architecture
+     Layered System - An application architecture needs to be composed of multiple layers. 
+	              Each layer doesn’t know any thing about any layer other than that of immediate layer 
+     Code on Demand - Servers can also provide executable code to the client.
+
+3. Desgiging REST API?
+Ans.1. It should be multilayered.
+    2. It should be scalable.
+    3. it should satisfy the 6 Architectural constraints along with http verbs.
+    4. While using layered architecture , change in one layer should not effect more than one layer.
